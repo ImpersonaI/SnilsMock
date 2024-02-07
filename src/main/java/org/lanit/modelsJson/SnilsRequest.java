@@ -13,12 +13,6 @@ public class SnilsRequest {
 
 	}
 
-	public SnilsRequest(String snils) {
-		setSnils(snils);
-		setNumbers(snils);
-		setCheckSumm(snils);
-	}
-
 	public int getCheckSumm() {
 		return checkSumm;
 	}
@@ -28,13 +22,13 @@ public class SnilsRequest {
 	}
 
 	public void setCheckSumm(String checkSumm) throws IndexOutOfBoundsException {
-
+		//getting value of checkSum
 		this.checkSumm = Integer.parseInt(getSnils().substring(12, 14));
 
 	}
 
 	public void setNumbers(String numbers) {
-
+		//getting only digits in snils
 		for (int i = 0; i <= getSnils().length() - 3; i++) {
 
 			char symbol = getSnils().charAt(i);

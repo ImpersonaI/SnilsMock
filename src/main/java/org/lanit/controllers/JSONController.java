@@ -26,21 +26,30 @@ public class JSONController {
                 // Parsing JSON
                 String snils = snilsRequest.getSnils();
 
-                SnilsRequest snilsInstance = new SnilsRequest(snils);
-
                 CheckSnils checkSnils = new CheckSnils();
                 try {
-                    checkSnils.checkSnils(snilsInstance.getNumbers(), snilsInstance.getCheckSumm());
-                    System.out.println(checkSnils.getIsValid());
+                    // Calling method to check snils
+                    checkSnils.checkSnils(snilsRequest.getNumbers(), snilsRequest.getCheckSumm());
+                    if (!checkSnils.getIsValid()) {
+                        return ResponseEntity.status(400).header("content-type", "application/json").body("{" +
+                                "  \"message\": \"Error: uncorrected snils\"," +
+                                "  \"snils\": \"" + snilsRequest.getSnils() + "\"" +
+                                "}");
+                    } else {
+                        //if summary is correct, return success
+                        return ResponseEntity.ok().header("Content-Type", "application/json").body(String.format("{\"message\":\"success\", \"snils\" : \"%s\"}", snilsRequest.getSnils()));
+                    }
                 } catch (Exception e) {
                     System.out.println(e);
+                    //if snils isn't correct, return error
                     return ResponseEntity.status(400).header("content-type", "application/json").body("{" +
                             "  \"message\": \"Error: uncorrected snils\"," +
-                            "  \"snils\": \"" + snilsInstance.getSnils() + "\"" +
+                            "  \"snils\": \"" + snilsRequest.getSnils() + "\"" +
                             "}");
                 }
             } catch (Exception e) {
                 System.out.println(e);
+
                 return ResponseEntity.status(400).header("content-type", "application/json").body("{" +
                         "  \"message\": \"Error: uncorrected snils\"," +
                         "  \"snils\": \"" + snilsRequest.getSnils() + "\"" +
@@ -48,16 +57,16 @@ public class JSONController {
             }
         } catch (Exception e) {
             System.out.println(e);
-            String replacedSnils = requestBodyData.replace("\r\n\s", "");
+            //Getting rid of unnecessary symbols
+            String replacedSnils = requestBodyData.replace("\r\n ", "");
             replacedSnils = replacedSnils.replace("\r\n", "");
-            replacedSnils = replacedSnils.replace("\"", "\\\"");
 
             return ResponseEntity.status(400).header("content-type", "application/json").body("{" +
-                    "  \"message\": \"Error: uncorrected snils\"," +
-                    "  \"request\": \"" +  replacedSnils  + "\"" +
+                    "  \"message\": \"Error: uncorrected json\"," +
+                    "  \"request\": " +  replacedSnils  +
                     "}");
         }
 
-        return ResponseEntity.ok().header("Content-Type", "application/json").body(String.format("{\"message\":\" JSON\", \"request:\" : \"%s\"}", requestBodyData));
+
     }
 }

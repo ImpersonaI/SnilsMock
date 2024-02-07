@@ -12,12 +12,11 @@ public class CheckSnils {
         isValid = valid;
     }
 
-
-
     public void checkSnils(String numbers, int checkSumm)  {
         int temp = 0;
         int summ = 0;
 
+        //checking snils based on the algorithm for check summ
         for (int i = 0; i < numbers.length(); i++) {
 
             char symbol = numbers.charAt(i);
