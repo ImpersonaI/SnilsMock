@@ -11,4 +11,4 @@ COPY out/artifacts/Snils_Check_jar/Snils_Check.jar /app
 EXPOSE 8080
 
 # Run the application when the container starts
-CMD ["java", "-jar", "Snils_Check.jar"]
+CMD ["java", "-jar", "snils_check.jar"]
