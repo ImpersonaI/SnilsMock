@@ -5,4 +5,4 @@ FROM openjdk:8-jdk-alpine
 COPY . .
 
 # Run the application when the container starts
-CMD java -jar /app/snils_check.jar
+CMD java -jar out/artifacts/snils_check_jar/Snils_Check.jar
