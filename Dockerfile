@@ -1,5 +1,5 @@
 # Use a base image with Java installed
-FROM openjdk:8-jdk-alpine
+FROM openjdk:20
 
 # Copy the executable jar file into the container
 COPY . .
