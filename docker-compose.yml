@@ -1,0 +1,14 @@
+version: '3'
+services:
+  snils_mock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: snils_mock
+    ports:
+      - "8088:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
